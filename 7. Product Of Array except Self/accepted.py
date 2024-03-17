@@ -3,19 +3,17 @@ from typing import List
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        res = [1] * len(nums)
+        first = second = float("inf")
 
-        prefix = 1
-        for i in range(len(nums)):
-            res[i] = prefix
-            prefix *= nums[i]
-        postfix = 1
+        for num in nums:
+            if num <= first:
+                first = num
+            elif num <= second:
+                second = num
+            else:
+                return True
+        return False
 
-        for i in range(len(nums) - 1, -1, -1):
-            res[i] *= postfix
-            postfix *= nums[i]
-            print(postfix)
-        return res
 
 solution = Solution()
 print(solution.productExceptSelf([1, 2, 3, 4]))
